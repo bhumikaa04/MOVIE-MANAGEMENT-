@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cine Vault - Home</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="images/icon.png">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">Cine Vault</a>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="search.html">Search</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Welcome to Cine Vault</h1>
+            <p>Discover the latest and greatest in the world of movies.</p>
+            <a href="search.html" class="btn">Explore Now</a>
+        </section>
+
+        <section class="carousel-section">
+            <h2>Top Rated Movies</h2>
+            <div class="carousel" id="topRatedMovies"></div>
+            <div class="carousel-controls">
+                <button onclick="scrollCarousel('topRatedMovies', -1)">❮</button>
+                <button onclick="scrollCarousel('topRatedMovies', 1)">❯</button>
+            </div>
+        </section>
+
+        <section class="carousel-section">
+            <h2>Upcoming Movies</h2>
+            <div class="carousel" id="upcomingMovies"></div>
+            <div class="carousel-controls">
+                <button onclick="scrollCarousel('upcomingMovies', -1)">❮</button>
+                <button onclick="scrollCarousel('upcomingMovies', 1)">❯</button>
+            </div>
+        </section>
+
+        <section class="carousel-section">
+            <h2>Popular Movies</h2>
+            <div class="carousel" id="popularMovies"></div>
+            <div class="carousel-controls">
+                <button onclick="scrollCarousel('popularMovies', -1)">❮</button>
+                <button onclick="scrollCarousel('popularMovies', 1)">❯</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2024 Movie Hub. All rights reserved.</p>
+    </footer>
+
+    <script src="js/movie-fetching.js"></script>
+</body>
+</html>

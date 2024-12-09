@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Movies - Cine Vault</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="images/icon.png">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">Cine Vault</a>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="search.html">Search</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="search-section">
+            <h1>Search for Movies</h1>
+            <form id="search-form">
+                <input type="text" id="search-input" placeholder="Enter movie name..." required>
+                <button type="submit" id="search-button">Search</button>
+            </form>
+        </section>
+
+        <section id="results" class="results-section">
+            <p>Enter a movie name to search for results.</p>
+        </section>
+    </main>
+
+    <footer style="bottom: 0; position: fixed; width: 100vw;">
+        <p>© 2024 Movie Hub. All rights reserved.</p>
+    </footer>
+
+    <script src="js/search_page.js"></script>
+</body>
+</html>

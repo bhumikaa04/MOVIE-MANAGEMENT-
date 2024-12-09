@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Details - Cine Vault</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="images/icon.png">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">Cine Vault</a>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="search.html">Search</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="movie-details">
+            <div class="movie-header">
+                <div class="movie-poster">
+                    <img id="moviePoster" src= "images/default-movie.jpg" alt="Movie Poster">
+                </div>
+                <div class="movie-info">
+                    <h2 id="movieTitle"></h2>
+                    <p id="movieReleaseDate"><strong>Release Date:</strong> </p>
+                    <p id="movieRating"><strong>Rating:</strong></p>
+                    <p id="movieGenre"><strong>Genres:</strong> </p>
+                    <p id="movieDescription"><strong>Description:</strong> </p>
+                </div>
+            </div>
+
+            <!-- <div class="movie-about">
+                <h3>About the Movie</h3>
+                <p>This section can contain additional information about the movie such as behind-the-scenes facts, cast details, and more...</p>
+            </div> -->
+        </section>
+    </main>
+
+    <footer style="bottom: 0; position: fixed; width: 100vw;">
+        <p>© 2024 Movie Hub. All rights reserved.</p>
+    </footer>
+
+    <script src="js/movie-fetching.js"></script>
+</body>
+</html>
