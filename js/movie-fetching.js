@@ -148,5 +148,3 @@ function setupScrollHandlers() {
 document.addEventListener('DOMContentLoaded', () => {
     setupScrollHandlers();
 });
-
-
