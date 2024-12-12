@@ -30,8 +30,8 @@
             <h2>Top Rated Movies</h2>
             <div class="carousel" id="topRatedMovies"></div>
             <div class="carousel-controls">
-                <button onclick="scrollCarousel('topRatedMovies', -1)">❮</button>
-                <button onclick="scrollCarousel('topRatedMovies', 1)">❯</button>
+                <button class="scroll-left" data-carousel-id="topRatedMovies">❮</button>
+                <button class="scroll-right" data-carousel-id="topRatedMovies">❯</button>
             </div>
         </section>
 
@@ -39,18 +39,14 @@
             <h2>Upcoming Movies</h2>
             <div class="carousel" id="upcomingMovies"></div>
             <div class="carousel-controls">
-                <button onclick="scrollCarousel('upcomingMovies', -1)">❮</button>
-                <button onclick="scrollCarousel('upcomingMovies', 1)">❯</button>
+                <button class="scroll-left" data-carousel-id="upcomingMovies">❮</button>
+                <button class="scroll-right" data-carousel-id="upcomingMovies">❯</button>
             </div>
         </section>
 
         <section class="carousel-section">
             <h2>Popular Movies</h2>
             <div class="carousel" id="popularMovies"></div>
-            <div class="carousel-controls">
-                <button onclick="scrollCarousel('popularMovies', -1)">❮</button>
-                <button onclick="scrollCarousel('popularMovies', 1)">❯</button>
-            </div>
         </section>
     </main>
 

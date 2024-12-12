@@ -47,75 +47,106 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 // Error handling function
 function displayError(message) {
-    document.getElementById('movieTitle').textContent = 'Error';
-    document.getElementById('movieDescription').textContent = message;
-    document.getElementById('movieGenre').innerHTML = '';
-    document.getElementById('movieReleaseDate').innerHTML = '';
-    document.getElementById('movieRating').innerHTML = '';
-    document.getElementById('moviePoster').src = 'images/default-movie.jpg';
+    const titleElement = document.getElementById('movieTitle');
+    const descriptionElement = document.getElementById('movieDescription');
+    const genreElement = document.getElementById('movieGenre');
+    const releaseDateElement = document.getElementById('movieReleaseDate');
+    const ratingElement = document.getElementById('movieRating');
+    const posterElement = document.getElementById('moviePoster');
+
+    if (titleElement) titleElement.textContent = 'Error';
+    if (descriptionElement) descriptionElement.textContent = message;
+    if (genreElement) genreElement.innerHTML = '';
+    if (releaseDateElement) releaseDateElement.innerHTML = '';
+    if (ratingElement) ratingElement.innerHTML = '';
+    if (posterElement) posterElement.src = 'images/default-movie.jpg';
 }
-const apiKey = 'a8944139f76a389d1f1cf59b26aba5df'; // Replace with your actual API key
+const apiKey = 'a8944139f76a389d1f1cf59b26aba5df';
 
 // Function to fetch movies based on category
 async function fetchMovies(category) {
-    const url = `https://api.themoviedb.org/3/movie/${category}?api_key=${apiKey}&language=en-US&page=1`;
-    const response = await fetch(url);
-    const data = await response.json();
-    return data.results;
+    try {
+        const url = `https://api.themoviedb.org/3/movie/${category}?api_key=${apiKey}&language=en-US&page=1`;
+        const response = await fetch(url);
+        if (!response.ok) throw new Error(`Failed to fetch ${category} movies: ${response.statusText}`);
+        const data = await response.json();
+        return data.results;
+    } catch (error) {
+        console.error(error);
+        return []; // Return empty array to avoid crashes
+    }
 }
 
 // Function to create a movie card element
 function createMovieCard(movie) {
     const card = document.createElement('div');
     card.classList.add('movie-card');
+    card.setAttribute('data-movie-id', movie.id); // Set movie ID in a data attribute
+    const posterUrl = movie.poster_path 
+        ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` 
+        : 'path/to/placeholder/image.jpg';
     card.innerHTML = `
-        <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title} Poster">
+        <img src="${posterUrl}" alt="${movie.title} Poster">
         <h4>${movie.title}</h4>
     `;
     return card;
 }
 
-
-
 // Function to populate carousels with movie data
 async function populateCarousels() {
-    // const trendingMovies = await fetchTrendingMovies();
     const topRatedMovies = await fetchMovies('top_rated');
     const upcomingMovies = await fetchMovies('upcoming');
     const popularMovies = await fetchMovies('popular');
 
-    // const trendingCarousel = document.getElementById('trendingMovies');
     const topRatedCarousel = document.getElementById('topRatedMovies');
     const upcomingCarousel = document.getElementById('upcomingMovies');
     const popularCarousel = document.getElementById('popularMovies');
 
-    // Populate Trending Movies
-    // trendingMovies.forEach(movie => {
-    //     trendingCarousel.appendChild(createMovieCard(movie));
-    // });
-
     // Populate Top Rated Movies
-    topRatedMovies.forEach(movie => {
-        topRatedCarousel.appendChild(createMovieCard(movie));
-    });
+    topRatedMovies.forEach(movie => topRatedCarousel.appendChild(createMovieCard(movie)));
 
     // Populate Upcoming Movies
-    upcomingMovies.forEach(movie => {
-        upcomingCarousel.appendChild(createMovieCard(movie));
-    });
+    upcomingMovies.forEach(movie => upcomingCarousel.appendChild(createMovieCard(movie)));
 
     // Populate Popular Movies
-    popularMovies.forEach(movie => {
-        popularCarousel.appendChild(createMovieCard(movie));
+    popularMovies.forEach(movie => popularCarousel.appendChild(createMovieCard(movie)));
+}
+
+// Event delegation to attach click handlers to all movie cards
+document.addEventListener('click', (event) => {
+    const movieElement = event.target.closest('.movie-card');
+    if (movieElement) {
+        const movieId = movieElement.getAttribute('data-movie-id');
+        if (movieId) {
+            window.location.href = `movie-detail.html?id=${movieId}`;
+        } else {
+            console.error('Movie ID is missing for this movie.');
+        }
+    }
+});
+
+// Ensure everything is loaded
+document.addEventListener('DOMContentLoaded', async () => { 
+    await populateCarousels(); 
+});
+
+
+// Function to scroll the carousel left or right
+function setupScrollHandlers() {
+    const scrollButtons = document.querySelectorAll('.scroll-left, .scroll-right');
+
+    scrollButtons.forEach(button => {
+        const direction = button.classList.contains('scroll-left') ? -1 : 1;
+        const carouselId = button.getAttribute('data-carousel-id');
+        
+        button.addEventListener('click', () => {
+            scrollCarousel(carouselId, direction);
+        });
     });
 }
 
-// Function to scroll the carousel left or right
-function scrollCarousel(carouselId, direction) {
-    const carousel = document.getElementById(carouselId);
-    const scrollAmount = direction * 150; // Adjust scroll amount as needed
-    carousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-}
+document.addEventListener('DOMContentLoaded', () => {
+    setupScrollHandlers();
+});
 
-// Call the function to populate the carousels when the page loads
-populateCarousels();
+
